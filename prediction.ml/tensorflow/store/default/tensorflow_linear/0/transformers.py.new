@@ -1,0 +1,22 @@
+import tensorflow as tf
+import predict_pb2
+import prediction_service_pb2
+
+# Inputs
+#   raw json
+# Outputs
+#   TensorFlow Serving Request
+def input_transformer(request):
+    # TODO:  don't hard code this!
+    inputs_np_array = np.asarray([1.0])
+    inputs_tensor_proto = tf.contrib.util.make_tensor_proto(inputs_np_array,
+                                                            dtype=tf.float32)
+    request.inputs['x_observed'].CopyFrom(inputs_tensor_proto)
+
+# Inputs
+#   TensorFlow Serving Response
+# Outputs
+#   raw json 
+def output_transformer(result):
+    output_np_array = tf.contrib.util.make_ndarray(result.outputs['y_pred'])
+    return json.dumps(np_array.tolist())

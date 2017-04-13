@@ -1,3 +1,4 @@
 ujson
 pandas
 numpy
+scikit-learn
