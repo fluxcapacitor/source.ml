@@ -5,7 +5,7 @@ import numpy as np
 
 # input: raw json
 # output: numpy array
-def input_transformer(input_binary):
+def transform_inputs(input_binary):
     input_str = input_binary.decode('utf-8')
     input_str = input_str.strip().replace('\n', ',')
     # surround the json with '[' ']' to prepare for conversion
@@ -20,5 +20,5 @@ def parse_json_line(json_line):
 
 # input: numpy array
 # output: list of json
-def output_transformer(output_np):
+def transform_outputs(output_np):
     return ujson.dumps(output_np.tolist())

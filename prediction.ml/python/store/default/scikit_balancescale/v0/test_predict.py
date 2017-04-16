@@ -4,7 +4,7 @@ import sys
 import pickle
 import ujson
 import pandas as pd
-from io_transformers import input_transformer, output_transformer
+from io_transformers import transform_inputs, transform_outputs
 
 def test(model_filename, test_input_filename, test_output_filename):
     with open(model_filename, 'rb') as fh:
@@ -15,9 +15,9 @@ def test(model_filename, test_input_filename, test_output_filename):
         expected_output = fh.read()
     print(expected_output)
 
-    df = input_transformer(data)
+    df = transform_inputs(data)
     actual_output = model.predict(df)
-    actual_output = output_transformer(actual_output)
+    actual_output = transform_outputs(actual_output)
     print(actual_output)
     return (expected_output.decode('utf-8').strip() == actual_output.strip())
 
