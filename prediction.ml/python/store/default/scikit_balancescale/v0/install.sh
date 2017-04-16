@@ -3,8 +3,9 @@
 # ensure we're in the root conda environment
 source activate root
 
+# Commenting this out for now
 # remove a possibly pre-existing `model_environment` environment.
-conda env remove -n model_environment --yes || true
+#conda env remove -n model_environment --yes || true
 
 # create a new, empty `model_environment` environment.
 conda create --yes -n model_environment python=3.5

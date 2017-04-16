@@ -13,13 +13,12 @@ def test(model_filename, test_input_filename, test_output_filename):
         data = fh.read() 
     with open(test_output_filename, 'rb') as fh:
         expected_output = fh.read()
-#    print(expected_output)
+    print(expected_output)
 
     df = input_transformer(data)
     actual_output = model.predict(df)
-#    print(actual_output)
     actual_output = output_transformer(actual_output)
-#    print(actual_output)
+    print(actual_output)
     return (expected_output.decode('utf-8').strip() == actual_output.strip())
 
 if __name__ == '__main__':
@@ -29,5 +28,6 @@ if __name__ == '__main__':
     parser.add_argument('test_input_filename')
     parser.add_argument('test_output_filename')
     args = parser.parse_args()
-
+    print('')
     print('TESTS PASSED:  %s' % test(args.model_filename, args.test_input_filename, args.test_output_filename))
+    print('')
