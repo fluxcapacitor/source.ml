@@ -27,4 +27,3 @@ export PIO_MODEL_FILENAME=$(ls *.pkl | sed -n 1p)
                                 "./test_inputs.txt" \
                                 "./test_outputs.txt"
 
-source deactivate model_environment
