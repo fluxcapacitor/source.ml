@@ -20,11 +20,3 @@ source activate model_environment
 
 # Check for (non-empty) wheel_requirements.txt and `pip install` it.
 [ -s ./wheel_requirements.txt ] && pip install -r ./wheel_requirements.txt
-
-export PIO_MODEL_FILENAME=$(ls *.pkl | sed -n 1p)
-[ -s ./test_predict.py ] && python test_predict.py \
-                                $PIO_MODEL_FILENAME \
-                                "./test_inputs.txt" \
-                                "./test_outputs.txt"
-
-source deactivate model_environment
