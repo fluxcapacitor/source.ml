@@ -4,22 +4,29 @@ import sys
 import pickle
 import ujson
 import pandas as pd
-from io_transformers import transform_inputs, transform_outputs
+import importlib
 
 def test(model_filename, test_input_filename, test_output_filename):
     with open(model_filename, 'rb') as fh:
         model = pickle.load(fh)
     with open(test_input_filename, 'rb') as fh:
-        data = fh.read() 
+        actual_input = fh.read() 
     with open(test_output_filename, 'rb') as fh:
         expected_output = fh.read()
     print(expected_output)
 
-    df = transform_inputs(data)
-    actual_output = model.predict(df)
-    actual_output = transform_outputs(actual_output)
-    print(actual_output)
-    return (expected_output.decode('utf-8').strip() == actual_output.strip())
+    # Load io_transformers module
+    transformers_module_name = 'io_transformers'
+    spec = importlib.util.spec_from_file_location(transformers_module_name, '%s.py' % transformers_module_name)
+    transformers_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(transformers_module)
+
+    actual_transformed_input = transformers_module.transform_inputs(actual_input)
+    actual_output = model.predict(actual_transformed_input)
+    actual_transformed_output = transformers_module.transform_outputs(actual_output)
+    print(actual_transformed_output)
+
+    return (expected_output.decode('utf-8').strip() == actual_transformed_output.strip())
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
