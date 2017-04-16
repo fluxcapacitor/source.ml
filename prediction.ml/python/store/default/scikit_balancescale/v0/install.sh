@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ensure we're in the root conda environment
 source activate root
