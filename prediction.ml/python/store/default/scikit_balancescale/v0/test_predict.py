@@ -1,10 +1,8 @@
 from __future__ import print_function, absolute_import, division
 
-import sys
-import dill as pickle
-import ujson
-import pandas as pd
+import json
 import importlib
+import dill as pickle
 
 def test(model_filename, test_input_filename, test_output_filename):
     with open(model_filename, 'rb') as fh:
@@ -26,7 +24,8 @@ def test(model_filename, test_input_filename, test_output_filename):
     actual_transformed_output = transformers_module.transform_outputs(actual_output)
     print(actual_transformed_output)
 
-    return (expected_output.decode('utf-8').strip() == actual_transformed_output.strip())
+    return (json.loads(expected_output.decode('utf-8').strip())
+        == json.loads(actual_transformed_output.strip()))
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
