@@ -1,7 +1,7 @@
 from __future__ import print_function, absolute_import, division
 
 import sys
-import pickle
+import dill as pickle
 import ujson
 import pandas as pd
 import importlib

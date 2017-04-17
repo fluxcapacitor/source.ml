@@ -2,3 +2,4 @@ ujson
 pandas
 numpy
 scikit-learn
+dill
