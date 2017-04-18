@@ -7,8 +7,8 @@ model = None
 def train():
     training_data = pd.read_csv('model_training.csv', sep=',', header=None)
 
-    X = balance_scale_data.values[:, 1:5]
-    Y = balance_scale_data.values[:, 0]
+    X = training_data.values[:, 1:5]
+    Y = training_data.values[:, 0]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=100)
 
     global model

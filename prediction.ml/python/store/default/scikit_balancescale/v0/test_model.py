@@ -11,10 +11,9 @@ def test(model_filename, test_input_filename, test_output_filename):
         actual_input = fh.read() 
     with open(test_output_filename, 'rb') as fh:
         expected_output = fh.read()
-#    print(expected_output)
 
     # Load io_transformers module
-    transformers_module_name = 'io_transformers'
+    transformers_module_name = 'model_io_transformers'
     spec = importlib.util.spec_from_file_location(transformers_module_name, '%s.py' % transformers_module_name)
     transformers_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(transformers_module)
