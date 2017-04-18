@@ -1,0 +1,1 @@
+{"personality_category": "dog_lover", "cat_affinity_score": 3.35, "dog_affinity_score": 6.35, "CAS_zscore": 14.25, "DAS_zscore": 57.5}
