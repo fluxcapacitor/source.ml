@@ -8,7 +8,7 @@ def test(model_filename, test_input_filename, test_output_filename):
     with open(model_filename, 'rb') as fh:
         model = pickle.load(fh)
     with open(test_input_filename, 'rb') as fh:
-        actual_input = fh.read()
+        actual_input = fh.read() 
     with open(test_output_filename, 'rb') as fh:
         expected_output = fh.read()
 
@@ -23,7 +23,7 @@ def test(model_filename, test_input_filename, test_output_filename):
     actual_transformed_output = transformers_module.transform_outputs(actual_output)
     print(actual_transformed_output)
 
-    return (json.loads(expected_output.decode('utf-8').strip())  == json.loads(actual_transformed_output.strip()))
+    return (json.loads(expected_output.decode('utf-8').strip()) == json.loads(actual_transformed_output.strip()))
 
 if __name__ == '__main__':
     from argparse import ArgumentParser

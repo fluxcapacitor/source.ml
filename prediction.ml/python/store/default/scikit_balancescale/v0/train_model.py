@@ -1,4 +1,4 @@
-import json
+import sys
 import dill as pickle
 
 import model
@@ -21,6 +21,6 @@ if __name__ == '__main__':
     # Pickle the entire `model` module imported above 
     # Note:  this must contain predict(inputs) method
     with open(model_pkl_filename, 'wb') as model_pkl_file:
-        pickle.dump(model, model_pkl_file)
+        pickle.dump(sys.modules['model'], model_pkl_file)
 
     print("...Done!")

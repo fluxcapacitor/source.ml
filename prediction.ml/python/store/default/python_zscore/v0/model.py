@@ -4,6 +4,8 @@ dog_mean = 0.0
 dog_stdv = 0.0
 
 def train():
+    print("Training model...")
+
     global cat_mean
     global cat_stdv
     global dog_mean
@@ -13,6 +15,8 @@ def train():
     cat_stdv = 0.20
     dog_mean = 0.3
     dog_stdv = 0.40
+
+    print("...Done!")
 
 def predict(inputs):
     cat_affinity_score = sum([ d['weight'] * d['user_score'] for d in inputs if 'cat' in d['tags'] ])
