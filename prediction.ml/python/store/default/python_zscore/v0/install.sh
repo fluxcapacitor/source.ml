@@ -2,6 +2,11 @@
 
 echo "Installing model and dependencies..."
 
+source activate root
+
+# Create a new, empty `model_environment` environment.
+conda create --yes -n model_environment python=3.5
+
 # Activate model_environment
 source activate model_environment
 

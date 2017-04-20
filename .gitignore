@@ -6,3 +6,4 @@
 .project
 __pycache__/
 bono_ml/
+bundle*.tar.gz
