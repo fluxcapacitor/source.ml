@@ -2,4 +2,4 @@ ujson==1.35
 pandas==0.19.2
 numpy==1.11.2
 scikit-learn==0.18.1
-dill==0.2.6
+dill==0.2.5
