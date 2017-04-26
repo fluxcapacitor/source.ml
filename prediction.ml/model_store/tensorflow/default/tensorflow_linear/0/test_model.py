@@ -4,7 +4,13 @@ import json
 import importlib
 import tensorflow as tf
 
-def test(model_path, test_input_filename, test_output_filename):
+def test(test_input_filename, test_output_filename):
+    model_path = '.'
+    with open(test_input_filename, 'rb') as fh:
+        actual_input = fh.read()
+    with open(test_output_filename, 'rb') as fh:
+        expected_output = fh.read()
+
     # Load io_transformers module
     transformers_module_name = 'model_io_transformers'
     spec = importlib.util.spec_from_file_location(transformers_module_name, '%s.py' % transformers_module_name)
@@ -12,10 +18,15 @@ def test(model_path, test_input_filename, test_output_filename):
     spec.loader.exec_module(transformers_module)
     actual_transformed_input = transformers_module.transform_inputs(actual_input)
 
-    with tf.Session(graph=tf.Graph()) as sess:
-        tf.saved_model.loader.load(sess, [tag_constants.SERVING], model_path)   
 
-        actual_output = sess.run(feed_dict=[1.0])
+    with tf.Session(graph=tf.Graph()) as sess:
+        tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], model_path)   
+
+        x_observed = tf.placeholder(dtype=tf.float32,
+                                          shape=[None, 1],
+                                          name='x_observed')
+
+        actual_output = sess.run(x_observed, feed_dict={'x_observed:0':1.5})
 
         #actual_output = model.predict(actual_transformed_input)
         actual_transformed_output = transformers_module.transform_outputs(actual_output)
@@ -26,10 +37,9 @@ def test(model_path, test_input_filename, test_output_filename):
 if __name__ == '__main__':
     from argparse import ArgumentParser
     parser = ArgumentParser()
-    parser.add_argument('model_path')
     parser.add_argument('test_input_filename')
     parser.add_argument('test_output_filename')
     args = parser.parse_args()
     print('')
-    print('TESTS PASSED:  %s' % test(args.model_path, args.test_input_filename, args.test_output_filename))
+    print('TESTS PASSED:  %s' % test(args.test_input_filename, args.test_output_filename))
     print('')
