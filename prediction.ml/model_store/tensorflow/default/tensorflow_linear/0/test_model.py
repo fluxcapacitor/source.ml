@@ -17,20 +17,24 @@ def test(test_input_filename, test_output_filename):
     transformers_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(transformers_module)
     actual_transformed_input = transformers_module.transform_inputs(actual_input)
-
+    print(actual_transformed_input)
 
     with tf.Session(graph=tf.Graph()) as sess:
         tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], model_path)   
 
-        x_observed = tf.placeholder(dtype=tf.float32,
-                                          shape=[None, 1],
-                                          name='x_observed')
-
-        actual_output = sess.run(x_observed, feed_dict={'x_observed:0':1.5})
-
+        #x_observed = tf.placeholder(dtype=tf.float32,
+        #                                  shape=[None, 1],
+        #                                  name='x_observed')
+        x_observed = sess.graph.get_tensor_by_name('x_observed:0')
+        y_pred = sess.graph.get_tensor_by_name('add:0')        
+        actual_output = sess.run(y_pred, feed_dict={'x_observed:0':actual_transformed_input.inputs['x_observed'].float_val})
+        print('actual: %s' % actual_output)
         #actual_output = model.predict(actual_transformed_input)
-        actual_transformed_output = transformers_module.transform_outputs(actual_output)
-        print(actual_transformed_output)
+        actual_transformed_output = json.dumps(actual_output.tolist())
+            #transformers_module.transform_outputs(actual_output)
+        # TODO:  add {"y_pred":...}
+        print('actual_transformed: %s' % actual_transformed_output)
+        print('expected: %s' % expected_output.decode('utf-8').strip())
 
     return (json.loads(expected_output.decode('utf-8').strip()) == json.loads(actual_transformed_output.strip()))
 
