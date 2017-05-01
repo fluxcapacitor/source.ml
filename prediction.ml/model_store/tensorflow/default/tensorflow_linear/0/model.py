@@ -7,6 +7,18 @@ class Predictor():
         self.dog_mean = dog_mean
         self.dog_stdv = dog_stdv
 
+    def setup_model():
+        pass
+
+    def teardown_model():
+        pass
+ 
+    def setup_request(inputs):
+        pass
+
+    def teardown_request(outputs):
+        pass
+
     def predict(self, inputs):
         cat_affinity_score = sum([ d['weight'] * d['user_score'] for d in inputs if 'cat' in d['tags'] ])
         dog_affinity_score = sum([ d['weight'] * d['user_score'] for d in inputs if 'dog' in d['tags'] ])
