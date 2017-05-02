@@ -4,6 +4,10 @@ import json
 import importlib
 import tensorflow as tf
 
+
+TODO:  FIX THIS!!
+
+
 def test(test_input_filename, test_output_filename):
     model_path = '.'
     with open(test_input_filename, 'rb') as fh:
@@ -22,18 +26,24 @@ def test(test_input_filename, test_output_filename):
     with tf.Session(graph=tf.Graph()) as sess:
         tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], model_path)   
 
+        print('graph %s' % sess.graph)
+
         #x_observed = tf.placeholder(dtype=tf.float32,
         #                                  shape=[None, 1],
         #                                  name='x_observed')
         x_observed = sess.graph.get_tensor_by_name('x_observed:0')
         y_pred = sess.graph.get_tensor_by_name('add:0')        
         actual_output = sess.run(y_pred, feed_dict={'x_observed:0':actual_transformed_input.inputs['x_observed'].float_val})
-        print('actual: %s' % actual_output)
+        print('actual output: %s' % actual_output)
+        print('actual output type: %s' % type(actual_output))
         #actual_output = model.predict(actual_transformed_input)
-        actual_transformed_output = json.dumps(actual_output.tolist())
-            #transformers_module.transform_outputs(actual_output)
+        hacked_actual_output = type('hacked_actual_output_obj', (object,), {'outputs' : actual_output}) 
+        hacked_actual_output.outputs = {'y_pred': actual_output}
+        actual_transformed_output = transformers_module.transform_outputs(hacked_actual_output)
+             #json.dumps(actual_output.tolist())
+        #transformers_module.transform_outputs(actual_output)
         # TODO:  add {"y_pred":...}
-        print('actual_transformed: %s' % actual_transformed_output)
+        print('actual transformed output: %s' % actual_transformed_output)
         print('expected: %s' % expected_output.decode('utf-8').strip())
 
     return (json.loads(expected_output.decode('utf-8').strip()) == json.loads(actual_transformed_output.strip()))
