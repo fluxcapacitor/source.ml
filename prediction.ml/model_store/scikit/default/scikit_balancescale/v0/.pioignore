@@ -1,0 +1,6 @@
+*.tar.gz
+*.csv
+test_*.*
+test.sh
+train.sh
+__pycache__
