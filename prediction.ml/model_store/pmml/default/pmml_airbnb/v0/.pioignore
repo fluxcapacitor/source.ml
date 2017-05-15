@@ -4,3 +4,4 @@ test_*.*
 test.sh
 train.sh
 __pycache__
+model_training.csv
