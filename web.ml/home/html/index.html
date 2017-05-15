@@ -106,11 +106,11 @@ Built with Love + Scale by former Netflix, Databricks, TensorFlow, Kubernetes, a
 </div>
     <script>
        var lock = new Auth0Lock('DHzxA6qnEgXHfcI8mDFntkRTve226DTE', 'pipelineio.auth0.com');
-       var btn_login = document.getElementById('btn-login');
+       //var btn_login = document.getElementById('btn-login');
 
-       btn_login.addEventListener('click', function() {
+       //btn_login.addEventListener('click', function() {
            lock.show();
-       });
+       //});
 
        lock.on("authenticated", function(authResult) {
          lock.getProfile(authResult.idToken, function(error, profile) {
