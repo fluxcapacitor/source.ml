@@ -4,14 +4,22 @@ from sklearn.cross_validation import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 import dill as pickle
 
-class Predictor():
+
+class Predictor(object):
     def __init__(self, model):
         self.model = model
+
+
+    def setup(self):
+        pass
+
 
     def predict(self, inputs):
         return self.model.predict_proba(inputs)
 
+
 if __name__ == '__main__':
+
     from argparse import ArgumentParser
     parser = ArgumentParser()
     parser.add_argument('model_pkl_filename')

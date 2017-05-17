@@ -7,7 +7,7 @@ import dill as pickle
 
 # TODO:  Coming Soon!
 
-class Predictor():
+class Predictor(object):
 
     def __init__(self, models, agg_fn):
         self.models = models
@@ -21,6 +21,10 @@ class Predictor():
         tensorflow_model_path = "."
         with tf.Session(graph=tf.Graph()) as sess:
             tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], tensorflow_model_path)
+
+
+    def setup(self):
+        pass
 
 
     def predict(self, inputs):

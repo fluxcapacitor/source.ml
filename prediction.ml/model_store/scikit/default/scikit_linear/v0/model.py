@@ -5,10 +5,15 @@ from sklearn import linear_model
 from sklearn import datasets
 import dill as pickle
 
-class Predictor():
+class Predictor(object):
 
     def __init__(self, model):
         self.model = model
+
+
+    def setup(self):
+        pass 
+
 
     def predict(self, inputs):
         return self.model.predict(inputs)

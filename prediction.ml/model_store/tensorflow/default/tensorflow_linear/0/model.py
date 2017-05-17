@@ -1,8 +1,14 @@
 import dill as pickle
 
-class Predictor():
+class Predictor(object):
 
     def __init__(self):
+        pass
+
+ 
+    def setup(self): 
+        pass
+
 
     def predict(self, inputs):
         return 'response' 

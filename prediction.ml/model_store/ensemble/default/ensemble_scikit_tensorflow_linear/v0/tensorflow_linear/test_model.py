@@ -23,6 +23,8 @@ def test(test_input_filename, test_output_filename):
     actual_transformed_input = transformers_module.transform_inputs(actual_input)
     print(actual_transformed_input)
 
+    #model.setup()
+
     with tf.Session(graph=tf.Graph()) as sess:
         tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], model_path)   
 

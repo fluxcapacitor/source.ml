@@ -1,11 +1,17 @@
 import dill as pickle
 
-class Predictor():
+class Predictor(object):
+
     def __init__(self, cat_mean, cat_stdv, dog_mean, dog_stdv):
         self.cat_mean = cat_mean
         self.cat_stdv = cat_stdv
         self.dog_mean = dog_mean
         self.dog_stdv = dog_stdv
+
+
+    def setup(self):
+        pass
+
 
     def predict(self, inputs):
         cat_affinity_score = sum([ d['weight'] * d['user_score'] for d in inputs if 'cat' in d['tags'] ])

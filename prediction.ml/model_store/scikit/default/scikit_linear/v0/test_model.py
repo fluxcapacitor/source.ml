@@ -18,6 +18,7 @@ def test(model_filename, test_input_filename, test_output_filename):
     transformers_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(transformers_module)
 
+    model.setup()
     actual_transformed_input = transformers_module.transform_inputs(actual_input)
     actual_output = model.predict(actual_transformed_input)
     actual_transformed_output = transformers_module.transform_outputs(actual_output)
