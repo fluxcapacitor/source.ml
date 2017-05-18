@@ -3,9 +3,9 @@ from __future__ import print_function, absolute_import, division
 import json
 import importlib
 import tensorflow as tf
+from tensorflow.contrib.saved_model.python.saved_model import signature_def_utils as signature_def_contrib_utils
 
-
-TODO:  FIX THIS!!
+#TODO:  FIX THIS!!
 
 
 def test(test_input_filename, test_output_filename):
@@ -23,25 +23,32 @@ def test(test_input_filename, test_output_filename):
     actual_transformed_input = transformers_module.transform_inputs(actual_input)
     print(actual_transformed_input)
 
-    model.setup()
+#    model.setup()
 
     with tf.Session(graph=tf.Graph()) as sess:
-        tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], model_path)   
-
+        meta_graph_def = tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], model_path)   
+        print('meta_graph_def %s' % meta_graph_def)
         print('graph %s' % sess.graph)
 
         #x_observed = tf.placeholder(dtype=tf.float32,
         #                                  shape=[None, 1],
         #                                  name='x_observed')
-        x_observed = sess.graph.get_tensor_by_name('x_observed:0')
-        y_pred = sess.graph.get_tensor_by_name('add:0')        
-        actual_output = sess.run(y_pred, feed_dict={'x_observed:0':actual_transformed_input.inputs['x_observed'].float_val})
+        internal_input_tensor_name = signature_def_contrib_utils.get_signature_def_by_key(meta_graph_def, 'predict').inputs['x_observed'].name
+        #x_observed = sess.graph.get_tensor_by_name('x_observed:0')
+        x_observed_internal = sess.graph.get_tensor_by_name(internal_input_tensor_name)
+
+        internal_output_tensor_name = signature_def_contrib_utils.get_signature_def_by_key(meta_graph_def, 'predict').outputs['y_pred'].name
+        #y_pred = sess.graph.get_tensor_by_name('add:0')
+        y_pred_internal = sess.graph.get_tensor_by_name(internal_output_tensor_name)     
+
+        #actual_output = sess.run(y_pred, feed_dict={'x_observed:0':actual_transformed_input.inputs['x_observed'].float_val})
+        actual_output = sess.run(y_pred_internal, feed_dict={internal_input_tensor_name:actual_transformed_input.inputs['x_observed'].float_val})
         print('actual output: %s' % actual_output)
         print('actual output type: %s' % type(actual_output))
         #actual_output = model.predict(actual_transformed_input)
-        hacked_actual_output = type('hacked_actual_output_obj', (object,), {'outputs' : actual_output}) 
-        hacked_actual_output.outputs = {'y_pred': actual_output}
-        actual_transformed_output = transformers_module.transform_outputs(hacked_actual_output)
+        #hacked_actual_output = type('hacked_actual_output_obj', (object,), {'outputs' : actual_output}) 
+        #hacked_actual_output.outputs = {'y_pred': actual_output}
+        actual_transformed_output = transformers_module.transform_outputs(actual_output)
              #json.dumps(actual_output.tolist())
         #transformers_module.transform_outputs(actual_output)
         # TODO:  add {"y_pred":...}
