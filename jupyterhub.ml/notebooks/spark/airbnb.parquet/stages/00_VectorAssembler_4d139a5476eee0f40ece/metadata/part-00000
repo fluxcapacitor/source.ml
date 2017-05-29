@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1495334163970,"sparkVersion":"2.1.0","uid":"VectorAssembler_4d139a5476eee0f40ece","paramMap":{"outputCol":"unscaled_continuous_features","inputCols":["bathrooms","bedrooms","security_deposit","cleaning_fee","extra_people","number_of_reviews","square_feet","review_scores_rating"]}}

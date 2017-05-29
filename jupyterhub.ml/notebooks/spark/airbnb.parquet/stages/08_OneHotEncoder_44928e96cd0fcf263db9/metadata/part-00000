@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1495334165407,"sparkVersion":"2.1.0","uid":"OneHotEncoder_44928e96cd0fcf263db9","paramMap":{"outputCol":"oh_encoder_host_is_super_host_index","inputCol":"host_is_super_host_index","dropLast":true}}
