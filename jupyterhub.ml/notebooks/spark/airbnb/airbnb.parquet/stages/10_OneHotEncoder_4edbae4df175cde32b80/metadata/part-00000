@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1495334165521,"sparkVersion":"2.1.0","uid":"OneHotEncoder_4edbae4df175cde32b80","paramMap":{"inputCol":"instant_bookable_index","dropLast":true,"outputCol":"oh_encoder_instant_bookable_index"}}
