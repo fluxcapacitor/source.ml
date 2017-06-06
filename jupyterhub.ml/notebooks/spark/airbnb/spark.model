@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+	<Header>
+		<Application/>
+		<Timestamp>2017-06-01T19:46:54Z</Timestamp>
+	</Header>
+	<DataDictionary>
+		<DataField name="bathrooms" optype="continuous" dataType="double"/>
+		<DataField name="bedrooms" optype="continuous" dataType="double"/>
+		<DataField name="security_deposit" optype="continuous" dataType="double"/>
+		<DataField name="cleaning_fee" optype="continuous" dataType="double"/>
+		<DataField name="extra_people" optype="continuous" dataType="double"/>
+		<DataField name="number_of_reviews" optype="continuous" dataType="double"/>
+		<DataField name="square_feet" optype="continuous" dataType="double"/>
+		<DataField name="review_scores_rating" optype="continuous" dataType="double"/>
+		<DataField name="room_type" optype="categorical" dataType="string">
+			<Value value="Entire home/apt"/>
+			<Value value="Private room"/>
+			<Value value="Shared room"/>
+		</DataField>
+		<DataField name="host_is_super_host" optype="categorical" dataType="string">
+			<Value value="0.0"/>
+			<Value value="1.0"/>
+		</DataField>
+		<DataField name="cancellation_policy" optype="categorical" dataType="string">
+			<Value value="strict"/>
+			<Value value="moderate"/>
+			<Value value="flexible"/>
+			<Value value="super_strict_30"/>
+			<Value value="no_refunds"/>
+			<Value value="long_term"/>
+			<Value value="super_strict_60"/>
+		</DataField>
+		<DataField name="instant_bookable" optype="categorical" dataType="string">
+			<Value value="0.0"/>
+			<Value value="1.0"/>
+		</DataField>
+		<DataField name="state" optype="categorical" dataType="string">
+			<Value value="Other"/>
+			<Value value="NY"/>
+			<Value value="CA"/>
+			<Value value="Berlin"/>
+			<Value value="IL"/>
+			<Value value="TX"/>
+			<Value value="WA"/>
+			<Value value="DC"/>
+			<Value value="OR"/>
+			<Value value="London"/>
+		</DataField>
+		<DataField name="price" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<TransformationDictionary>
+		<DerivedField name="scaled_continuous_features[0]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="bathrooms"/>
+				<Constant dataType="double">2.0672003483778023</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[1]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="bedrooms"/>
+				<Constant dataType="double">1.1830776709198674</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[2]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="security_deposit"/>
+				<Constant dataType="double">0.005514711441510699</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[3]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="cleaning_fee"/>
+				<Constant dataType="double">0.023364929148448777</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[4]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="extra_people"/>
+				<Constant dataType="double">0.05436887126842819</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[5]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="number_of_reviews"/>
+				<Constant dataType="double">0.0372064553061003</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[6]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="square_feet"/>
+				<Constant dataType="double">0.0027483652179397453</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="scaled_continuous_features[7]" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="review_scores_rating"/>
+				<Constant dataType="double">0.1131125173766816</Constant>
+			</Apply>
+		</DerivedField>
+	</TransformationDictionary>
+	<RegressionModel functionName="regression">
+		<MiningSchema>
+			<MiningField name="price" usageType="target"/>
+			<MiningField name="bathrooms"/>
+			<MiningField name="bedrooms"/>
+			<MiningField name="security_deposit"/>
+			<MiningField name="cleaning_fee"/>
+			<MiningField name="extra_people"/>
+			<MiningField name="number_of_reviews"/>
+			<MiningField name="square_feet"/>
+			<MiningField name="review_scores_rating"/>
+			<MiningField name="room_type"/>
+			<MiningField name="host_is_super_host"/>
+			<MiningField name="cancellation_policy"/>
+			<MiningField name="instant_bookable"/>
+			<MiningField name="state"/>
+		</MiningSchema>
+		<RegressionTable intercept="-31.246650719637568">
+			<NumericPredictor name="scaled_continuous_features[0]" coefficient="16.971678684000953"/>
+			<NumericPredictor name="scaled_continuous_features[1]" coefficient="21.868971083905258"/>
+			<NumericPredictor name="scaled_continuous_features[2]" coefficient="1.1517183669021873"/>
+			<NumericPredictor name="scaled_continuous_features[3]" coefficient="24.142806546494086"/>
+			<NumericPredictor name="scaled_continuous_features[4]" coefficient="2.370044153199762"/>
+			<NumericPredictor name="scaled_continuous_features[5]" coefficient="-2.700530275593283"/>
+			<NumericPredictor name="scaled_continuous_features[6]" coefficient="3.544618903985046"/>
+			<NumericPredictor name="scaled_continuous_features[7]" coefficient="4.479591077379613"/>
+			<CategoricalPredictor name="room_type" value="Entire home/apt" coefficient="24.506235911887995"/>
+			<CategoricalPredictor name="room_type" value="Private room" coefficient="-14.619686550514718"/>
+			<CategoricalPredictor name="host_is_super_host" value="0.0" coefficient="-5.732075545744507"/>
+			<CategoricalPredictor name="cancellation_policy" value="strict" coefficient="2.446456708698368"/>
+			<CategoricalPredictor name="cancellation_policy" value="moderate" coefficient="-4.470579134666461"/>
+			<CategoricalPredictor name="cancellation_policy" value="flexible" coefficient="0.0"/>
+			<CategoricalPredictor name="cancellation_policy" value="super_strict_30" coefficient="73.63188227994401"/>
+			<CategoricalPredictor name="cancellation_policy" value="no_refunds" coefficient="0.0"/>
+			<CategoricalPredictor name="cancellation_policy" value="long_term" coefficient="0.0"/>
+			<CategoricalPredictor name="instant_bookable" value="0.0" coefficient="6.7904570608718755"/>
+			<CategoricalPredictor name="state" value="Other" coefficient="-10.979396492892548"/>
+			<CategoricalPredictor name="state" value="NY" coefficient="20.833849300670668"/>
+			<CategoricalPredictor name="state" value="CA" coefficient="12.287821223699352"/>
+			<CategoricalPredictor name="state" value="Berlin" coefficient="-49.88983717653383"/>
+			<CategoricalPredictor name="state" value="IL" coefficient="15.695002515873355"/>
+			<CategoricalPredictor name="state" value="TX" coefficient="34.818655760486635"/>
+			<CategoricalPredictor name="state" value="WA" coefficient="-7.9294543027855795"/>
+			<CategoricalPredictor name="state" value="DC" coefficient="5.934802058994516"/>
+			<CategoricalPredictor name="state" value="OR" coefficient="-17.310941873265158"/>
+		</RegressionTable>
+	</RegressionModel>
+</PMML>
