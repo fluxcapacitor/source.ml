@@ -27,6 +27,7 @@ spec:
           limits:
             cpu: 3000m
             memory: 3000Mi
+            alpha.kubernetes.io/nvidia-gpu: 1
           requests:
             cpu: 300m
             memory: 100Mi 
