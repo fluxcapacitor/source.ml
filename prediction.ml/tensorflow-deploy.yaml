@@ -26,10 +26,10 @@ spec:
         resources:
           limits:
             cpu: 3000m
-            memory: 1000Mi
+            memory: 3000Mi
           requests:
             cpu: 300m
-            memory: 100Mi 
+            memory: 300Mi 
         imagePullPolicy: "Always"
         env:
         - name: PIO_MODEL_TYPE
@@ -48,6 +48,11 @@ spec:
         volumeMounts:
           - name: git-volume
             mountPath: /root/volumes
+        tolerations: 
+          - key: "node.alpha.kubernetes.io/notReady"
+            operator: "Exists"
+            effect: "NoExecute"
+            tolerationSeconds: 6000
       volumes:
         - name: git-volume
           gitRepo:
