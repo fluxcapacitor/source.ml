@@ -48,11 +48,11 @@ spec:
         volumeMounts:
           - name: git-volume
             mountPath: /root/volumes
-#        tolerations: 
-#          - key: "node.kubernetes.io/notReady"
-#            operator: "Exists"
-#            effect: "NoExecute"
-#            tolerationSeconds: 6000
+      tolerations: 
+        - key: "node.kubernetes.io/notReady"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 6000
       volumes:
         - name: git-volume
           gitRepo:
