@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: prediction-tensorflow
-        image: docker.io/fluxcapacitor/prediction-tensorflow:master
+        image: docker.io/fluxcapacitor/prediction-tensorflow-cpu:master
         resources:
           limits:
             cpu: 3000m
