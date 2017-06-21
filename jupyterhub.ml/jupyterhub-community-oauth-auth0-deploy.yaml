@@ -19,11 +19,11 @@ spec:
         image: docker.io/fluxcapacitor/jupyterhub:master
         resources:
           limits:
-            cpu: 2000m
-            memory: 2000Mi
+            cpu: 8000m
+            memory: 12000Mi
           requests:
-            cpu: 200m
-            memory: 200Mi
+            cpu: 1000m
+            memory: 1000Mi
         imagePullPolicy: "Always"
         env:
         - name: GET_HOSTS_FROM
