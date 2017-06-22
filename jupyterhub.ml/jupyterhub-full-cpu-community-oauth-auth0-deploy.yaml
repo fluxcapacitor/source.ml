@@ -15,15 +15,15 @@ spec:
         app: jupyterhub-full-cpu
     spec:
       containers:
-      - name: jupyterhub
+      - name: jupyterhub-full-cpu
         image: docker.io/fluxcapacitor/jupyterhub-full-cpu:master
         resources:
           limits:
-            cpu: 8000m
-            memory: 12000Mi
+            cpu: 2000m
+            memory: 4000Mi
           requests:
-            cpu: 1000m
-            memory: 1000Mi
+            cpu: 200m
+            memory: 400Mi
         imagePullPolicy: "Always"
         env:
         - name: GET_HOSTS_FROM
@@ -59,7 +59,11 @@ spec:
         - key: "node.alpha.kubernetes.io/notReady"
           operator: "Exists"
           effect: "NoExecute"
-          tolerationSeconds: 6000
+          tolerationSeconds: 60000
+        - key: "node.alpha.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 60000
       volumes:
         - name: git-volume
           gitRepo:
