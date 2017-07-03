@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
       - name: jupyterhub
-        image: docker.io/fluxcapacitor/jupyterhub:master
+        image: docker.io/fluxcapacitor/jupyterhub-cpu:master
         resources:
           limits:
-            cpu: 2000m
-            memory: 2000Mi
+            cpu: 8000m
+            memory: 12000Mi
           requests:
-            cpu: 200m
-            memory: 200Mi
+            cpu: 1000m
+            memory: 1000Mi
         imagePullPolicy: "Always"
         env:
         - name: GET_HOSTS_FROM
@@ -33,13 +33,21 @@ spec:
         - name: SPARK_SUBMIT_ARGS
           value: ""
         - name: JUPYTERHUB_AUTHENTICATOR
-          value: dummyauthenticator.DummyAuthenticator 
+          value: oauthenticator.auth0.CommunityAuth0OAuthenticator
+        - name: AUTH0_SUBDOMAIN
+          value: pipelineio
         - name: OAUTH_CALLBACK_URL
-          value: "" 
+          value: http://jupyter.community.pipeline.io/hub/oauth_callback 
         - name: OAUTH_CLIENT_ID
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: oauth
+              key: OAUTH_CLIENT_ID
         - name: OAUTH_CLIENT_SECRET
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: oauth
+              key: OAUTH_CLIENT_SECRET
         ports:
         - containerPort: 6006
         - containerPort: 8754
