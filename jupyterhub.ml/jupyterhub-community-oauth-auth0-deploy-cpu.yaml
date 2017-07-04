@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jupyterhub
+  labels:
+    app: jupyterhub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+  template:
+    metadata:
+      labels:
+        app: jupyterhub
+    spec:
+      containers:
+      - name: jupyterhub
+        image: docker.io/fluxcapacitor/jupyterhub-cpu:master
+        resources:
+          limits:
+            cpu: 8000m
+            memory: 12000Mi
+          requests:
+            cpu: 1000m
+            memory: 1000Mi
+        imagePullPolicy: "Always"
+        env:
+        - name: GET_HOSTS_FROM
+          value: env
+        - name: SPARK_MASTER
+          value: spark://apachespark-master-2-1-0:7077
+        - name: SPARK_SUBMIT_ARGS
+          value: ""
+        - name: JUPYTERHUB_AUTHENTICATOR
+          value: oauthenticator.auth0.CommunityAuth0OAuthenticator
+        - name: AUTH0_SUBDOMAIN
+          value: pipelineio
+        - name: OAUTH_CALLBACK_URL
+          value: http://jupyter.community.pipeline.io/hub/oauth_callback 
+        - name: OAUTH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: oauth
+              key: OAUTH_CLIENT_ID
+        - name: OAUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: oauth
+              key: OAUTH_CLIENT_SECRET
+        ports:
+        - containerPort: 6006
+        - containerPort: 8754
+        - containerPort: 8755
+        volumeMounts:
+          - name: git-volume
+            mountPath: /root/volumes
+      volumes:
+        - name: git-volume
+          gitRepo:
+            repository: "https://github.com/fluxcapacitor/source.ml"
+            # repository: "https://[o-auth-personal-acess-token]:x-oauth-basic@github.com/fluxcapacitor/source.ml.git"
+            revision: "master"
