@@ -19,11 +19,11 @@ spec:
         image: docker.io/fluxcapacitor/jenkins:master
         resources:
           limits:
-            cpu: 2000m
-            memory: 2000Mi
+            cpu: 4000m
+            memory: 8000Mi
           requests:
-            cpu: 200m
-            memory: 200Mi
+            cpu: 400m
+            memory: 800Mi
         imagePullPolicy: "Always"
         env:
         - name: GET_HOSTS_FROM
