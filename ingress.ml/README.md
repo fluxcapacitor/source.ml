@@ -10,12 +10,6 @@ route inbound connections to cluster services.
 The configurations implemented in this ingress-nginx application use a wildcard ssl cert that must be generated separately for
 SSL/TLS authentication.
 
-### ingress-nginx deploy
-
-```
-kubectl apply -f ingress-nginx-v1.6.0-app.yaml
-```
-
 #### ingress - certs
 
 Execute `sudo bash generate-wildcard-ssl-cert.sh` to generate an rsa key and wildcard certificate required to use SSL with the 
@@ -48,6 +42,20 @@ aws acm list-certificates
 
 For more information about how to import your wildcard certificate into AWS Certificate Manager see [Importing Certificates 
 into AWS Certificate Manager](http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) 
+
+### ingress-nginx deploy
+
+Kubernetes uses the [service.beta.kubernetes.io/aws-load-balancer-ssl-cert](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/aws/aws.go#L121) 
+annotation on services to request a secure listener.  Update the service.beta.kubernetes.io/aws-load-balancer-ssl-cert 
+annotation in ingress-nginx-v1.6.0-app.yaml replacing the following text with the arn returned by the AWS cli command above: 
+```
+arn:aws:acm:<aws-region>:<account>:certificate/<uuid>
+```
+
+Deploy ingress-nginx
+```
+kubectl apply -f ingress-nginx-v1.6.0-app.yaml
+```
 
 ##### Create Route53 CNAME's
 
@@ -94,9 +102,3 @@ aws route53 change-resource-record-sets --hosted-zone-id $hosted_zone_id \
                 }'
 ```
 
-Kubernetes uses the [service.beta.kubernetes.io/aws-load-balancer-ssl-cert](https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/aws/aws.go#L121) 
-annotation on services to request a secure listener.  Update the service.beta.kubernetes.io/aws-load-balancer-ssl-cert 
-annotation in ingress-nginx-v1.6.0-app.yaml replacing the following text with the arn returned by the AWS cli command above: 
-```
-arn:aws:acm:<aws-region>:<account>:certificate/<uuid>
-```
