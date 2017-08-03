@@ -1,0 +1,59 @@
+SHA1 Fingerprint=66:B0:8D:89:50:59:82:A1:D8:7B:B0:5A:6B:57:3A:CB:2A:3C:59:F4
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            9f:58:ad:12:8d:6f:0a:bf
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, ST=California, L=San Francisco, O=Pipeline.IO, CN=*.pipeline.io/emailAddress=chris@fregly.com
+        Validity
+            Not Before: Jul  6 03:33:54 2017 GMT
+            Not After : Jul  6 03:33:54 2018 GMT
+        Subject: C=US, ST=California, L=San Francisco, O=Pipeline.IO, CN=*.pipeline.io/emailAddress=chris@fregly.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:df:ee:75:38:00:fd:70:94:f0:3f:f4:4d:87:44:
+                    c1:b3:41:bb:8c:7a:fe:c2:ee:a3:1f:f5:c3:6d:47:
+                    e5:54:ad:ed:7e:f2:c7:ea:8e:08:ac:f5:67:7a:d3:
+                    ce:2e:65:f7:ad:74:6d:30:76:7c:2a:dc:61:f7:b0:
+                    6f:6a:25:39:81:53:ed:32:3e:f1:b8:ae:66:10:c6:
+                    cd:15:ac:72:90:23:e5:56:43:2d:8a:e3:06:9c:a8:
+                    b7:4b:68:4c:80:81:2f:cd:07:eb:8c:1f:cc:71:90:
+                    66:87:cb:83:1c:b5:05:2b:a5:7b:69:ca:7b:e7:40:
+                    c6:20:97:78:79:84:76:9e:fd:de:69:78:f1:c8:ee:
+                    9e:8a:5d:a8:70:65:b3:af:af:bd:4b:15:21:e6:98:
+                    a4:3e:cf:3d:49:e2:de:c4:99:89:12:31:4f:ec:24:
+                    01:8a:2a:a6:d5:7b:59:88:c3:3e:e8:cf:90:b1:2b:
+                    98:08:08:e4:ea:55:09:25:10:3a:fe:9f:91:3f:47:
+                    49:c5:14:47:81:56:05:d9:cf:b7:9a:8a:5a:ed:41:
+                    bc:3d:83:06:f8:82:8e:b8:c7:ae:1f:c1:4a:77:3b:
+                    9d:1b:cc:27:6c:b7:fc:da:6f:75:65:dd:90:18:e8:
+                    9f:fe:85:7a:fd:56:bd:ac:d9:c5:2d:b1:8a:db:83:
+                    b4:31
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                34:37:1D:4A:02:92:B4:48:15:DC:01:39:A7:AC:4B:2B:94:9F:E8:29
+            X509v3 Authority Key Identifier: 
+                keyid:34:37:1D:4A:02:92:B4:48:15:DC:01:39:A7:AC:4B:2B:94:9F:E8:29
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: sha256WithRSAEncryption
+         5a:a2:4a:cf:00:28:53:ac:1d:47:b6:1e:41:f1:ea:05:f2:9d:
+         54:3f:c5:ff:d9:28:c8:6a:09:2f:cd:2e:32:15:0b:d2:57:53:
+         05:12:cd:53:2b:1e:43:d7:06:40:db:f8:08:1c:31:25:7c:af:
+         0b:a8:d0:b6:ae:e9:cd:81:1e:a6:64:ac:7c:e1:a4:af:f7:28:
+         71:61:e4:25:8c:74:46:77:b8:95:6b:d5:d0:b3:ca:39:19:3c:
+         71:73:68:ec:4c:0d:b1:58:2a:ea:51:d5:5e:67:75:dc:b8:3b:
+         79:a3:f7:27:bd:1f:20:e5:aa:53:e4:a5:48:3c:e9:e6:94:3f:
+         91:76:54:5c:6b:57:28:2d:90:1a:4d:69:e0:00:5d:44:68:2f:
+         c4:22:a0:75:95:51:62:aa:95:f8:aa:c2:08:06:6f:29:41:99:
+         89:41:32:2f:7b:5f:c7:41:e2:4b:6e:1b:82:3f:4a:13:44:3e:
+         5f:94:52:03:25:f1:48:c1:a8:bb:38:68:8f:4f:da:4a:53:70:
+         67:23:e3:74:d2:b2:23:eb:27:2d:85:72:33:2d:7f:b1:3e:5c:
+         15:67:e8:d6:72:81:54:64:b8:53:a6:39:ff:dc:14:86:9f:d8:
+         cc:49:dc:07:90:63:cc:49:0d:40:4f:18:6d:ed:75:db:e9:96:
+         29:d0:bb:10
